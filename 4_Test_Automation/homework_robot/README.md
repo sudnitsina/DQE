@@ -7,7 +7,7 @@ MS SQL SERVER instance is running. TRN database from Module 1 created and filled
     > pip install -r requirements.txt
 3. Update `4_Test_Automation/homework_robot/resources/db.cfg` configuration using real data to connect your database server
 
-4. To run the test suite, and run the following command:
+4. Run test suite with the following command:
     > robot tests/
 
     This will execute all tests in the tests/ directory and generate a report and log file in the results/ directory.
