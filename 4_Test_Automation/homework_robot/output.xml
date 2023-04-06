@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.9.6 on darwin)" generated="20230406 21:52:16.517" rpa="false" schemaversion="3">
+<suite id="s1" name="Tests" source="/Users/Anna_Sudnitsyna/Documents/3 pandas/4_Test_Automation/homework_robot/tests">
+<suite id="s1-s1" name="Test Departments" source="/Users/Anna_Sudnitsyna/Documents/3 pandas/4_Test_Automation/homework_robot/tests/test_departments.robot">
+<test id="s1-s1-t1" name="Check count of unique values in location_id column" line="9">
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
+connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
+<msg timestamp="20230406 21:52:16.565" level="INFO">Connecting using : pymssql.connect(database=TRN, user=SA, password=4Fh2FwDjQYTLMbPZ, host=127.0.0.1, port=1433) </msg>
+<status status="PASS" starttime="20230406 21:52:16.557" endtime="20230406 21:52:16.592"/>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<var>@{results}</var>
+<arg>SELECT COUNT(DISTINCT(location_id)) FROM ${TABLE_NAME}</arg>
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<msg timestamp="20230406 21:52:16.593" level="INFO">Executing : Query  |  SELECT COUNT(DISTINCT(location_id)) FROM hr.departments </msg>
+<msg timestamp="20230406 21:52:16.599" level="INFO">@{results} = [ (7,) ]</msg>
+<status status="PASS" starttime="20230406 21:52:16.592" endtime="20230406 21:52:16.599"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${results}[0][0]</arg>
+<arg>7</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230406 21:52:16.600" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230406 21:52:16.599" endtime="20230406 21:52:16.600"/>
+</kw>
+<status status="PASS" starttime="20230406 21:52:16.556" endtime="20230406 21:52:16.600"/>
+</test>
+<test id="s1-s1-t2" name="Check most frequent value in location_id column" line="14">
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
+connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
+<msg timestamp="20230406 21:52:16.602" level="INFO">Connecting using : pymssql.connect(database=TRN, user=SA, password=4Fh2FwDjQYTLMbPZ, host=127.0.0.1, port=1433) </msg>
+<status status="PASS" starttime="20230406 21:52:16.601" endtime="20230406 21:52:16.621"/>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<var>@{results}</var>
+<arg>SELECT TOP 1 location_id, COUNT(location_id) AS f FROM ${TABLE_NAME} GROUP BY location_id ORDER BY f DESC</arg>
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<msg timestamp="20230406 21:52:16.622" level="INFO">Executing : Query  |  SELECT TOP 1 location_id, COUNT(location_id) AS f FROM hr.departments GROUP BY location_id ORDER BY f DESC </msg>
+<msg timestamp="20230406 21:52:16.625" level="INFO">@{results} = [ (1700, 5) ]</msg>
+<status status="PASS" starttime="20230406 21:52:16.621" endtime="20230406 21:52:16.625"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${results}[0][0]</arg>
+<arg>1700</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230406 21:52:16.625" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230406 21:52:16.625" endtime="20230406 21:52:16.626"/>
+</kw>
+<status status="PASS" starttime="20230406 21:52:16.600" endtime="20230406 21:52:16.626"/>
+</test>
+<status status="PASS" starttime="20230406 21:52:16.540" endtime="20230406 21:52:16.626"/>
+</suite>
+<suite id="s1-s2" name="Test Jobs" source="/Users/Anna_Sudnitsyna/Documents/3 pandas/4_Test_Automation/homework_robot/tests/test_jobs.robot">
+<test id="s1-s2-t1" name="Check number of NULL values" line="10">
+<kw name="Check number of NULL values in column">
+<arg>job_id</arg>
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
+connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
+<msg timestamp="20230406 21:52:16.630" level="INFO">Connecting using : pymssql.connect(database=TRN, user=SA, password=4Fh2FwDjQYTLMbPZ, host=127.0.0.1, port=1433) </msg>
+<status status="PASS" starttime="20230406 21:52:16.630" endtime="20230406 21:52:16.650"/>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<var>@{results}</var>
+<arg>SELECT * from ${TABLE_NAME} WHERE ${column} IS NULL</arg>
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<msg timestamp="20230406 21:52:16.651" level="INFO">Executing : Query  |  SELECT * from hr.jobs WHERE job_id IS NULL </msg>
+<msg timestamp="20230406 21:52:16.655" level="INFO">@{results} = [ ]</msg>
+<status status="PASS" starttime="20230406 21:52:16.650" endtime="20230406 21:52:16.655"/>
+</kw>
+<kw name="Should Be Empty" library="BuiltIn">
+<arg>${results}</arg>
+<doc>Verifies that the given item is empty.</doc>
+<msg timestamp="20230406 21:52:16.655" level="INFO">Length is 0</msg>
+<status status="PASS" starttime="20230406 21:52:16.655" endtime="20230406 21:52:16.655"/>
+</kw>
+<status status="PASS" starttime="20230406 21:52:16.630" endtime="20230406 21:52:16.655"/>
+</kw>
+<kw name="Check number of NULL values in column">
+<arg>job_title</arg>
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
+connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
+<msg timestamp="20230406 21:52:16.656" level="INFO">Connecting using : pymssql.connect(database=TRN, user=SA, password=4Fh2FwDjQYTLMbPZ, host=127.0.0.1, port=1433) </msg>
+<status status="PASS" starttime="20230406 21:52:16.656" endtime="20230406 21:52:16.672"/>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<var>@{results}</var>
+<arg>SELECT * from ${TABLE_NAME} WHERE ${column} IS NULL</arg>
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<msg timestamp="20230406 21:52:16.673" level="INFO">Executing : Query  |  SELECT * from hr.jobs WHERE job_title IS NULL </msg>
+<msg timestamp="20230406 21:52:16.677" level="INFO">@{results} = [ ]</msg>
+<status status="PASS" starttime="20230406 21:52:16.673" endtime="20230406 21:52:16.678"/>
+</kw>
+<kw name="Should Be Empty" library="BuiltIn">
+<arg>${results}</arg>
+<doc>Verifies that the given item is empty.</doc>
+<msg timestamp="20230406 21:52:16.678" level="INFO">Length is 0</msg>
+<status status="PASS" starttime="20230406 21:52:16.678" endtime="20230406 21:52:16.678"/>
+</kw>
+<status status="PASS" starttime="20230406 21:52:16.656" endtime="20230406 21:52:16.678"/>
+</kw>
+<kw name="Check number of NULL values in column">
+<arg>min_salary</arg>
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
+connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
+<msg timestamp="20230406 21:52:16.679" level="INFO">Connecting using : pymssql.connect(database=TRN, user=SA, password=4Fh2FwDjQYTLMbPZ, host=127.0.0.1, port=1433) </msg>
+<status status="PASS" starttime="20230406 21:52:16.678" endtime="20230406 21:52:16.696"/>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<var>@{results}</var>
+<arg>SELECT * from ${TABLE_NAME} WHERE ${column} IS NULL</arg>
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<msg timestamp="20230406 21:52:16.697" level="INFO">Executing : Query  |  SELECT * from hr.jobs WHERE min_salary IS NULL </msg>
+<msg timestamp="20230406 21:52:16.703" level="INFO">@{results} = [ ]</msg>
+<status status="PASS" starttime="20230406 21:52:16.696" endtime="20230406 21:52:16.703"/>
+</kw>
+<kw name="Should Be Empty" library="BuiltIn">
+<arg>${results}</arg>
+<doc>Verifies that the given item is empty.</doc>
+<msg timestamp="20230406 21:52:16.704" level="INFO">Length is 0</msg>
+<status status="PASS" starttime="20230406 21:52:16.704" endtime="20230406 21:52:16.704"/>
+</kw>
+<status status="PASS" starttime="20230406 21:52:16.678" endtime="20230406 21:52:16.704"/>
+</kw>
+<kw name="Check number of NULL values in column">
+<arg>max_salary</arg>
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
+connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
+<msg timestamp="20230406 21:52:16.705" level="INFO">Connecting using : pymssql.connect(database=TRN, user=SA, password=4Fh2FwDjQYTLMbPZ, host=127.0.0.1, port=1433) </msg>
+<status status="PASS" starttime="20230406 21:52:16.704" endtime="20230406 21:52:16.723"/>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<var>@{results}</var>
+<arg>SELECT * from ${TABLE_NAME} WHERE ${column} IS NULL</arg>
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<msg timestamp="20230406 21:52:16.724" level="INFO">Executing : Query  |  SELECT * from hr.jobs WHERE max_salary IS NULL </msg>
+<msg timestamp="20230406 21:52:16.727" level="INFO">@{results} = [ ]</msg>
+<status status="PASS" starttime="20230406 21:52:16.723" endtime="20230406 21:52:16.727"/>
+</kw>
+<kw name="Should Be Empty" library="BuiltIn">
+<arg>${results}</arg>
+<doc>Verifies that the given item is empty.</doc>
+<msg timestamp="20230406 21:52:16.727" level="INFO">Length is 0</msg>
+<status status="PASS" starttime="20230406 21:52:16.727" endtime="20230406 21:52:16.727"/>
+</kw>
+<status status="PASS" starttime="20230406 21:52:16.704" endtime="20230406 21:52:16.728"/>
+</kw>
+<status status="PASS" starttime="20230406 21:52:16.629" endtime="20230406 21:52:16.728"/>
+</test>
+<test id="s1-s2-t2" name="Check average salary" line="16">
+<kw name="Check average value in column">
+<arg>min_salary</arg>
+<arg>6568.421052</arg>
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
+connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
+<msg timestamp="20230406 21:52:16.729" level="INFO">Connecting using : pymssql.connect(database=TRN, user=SA, password=4Fh2FwDjQYTLMbPZ, host=127.0.0.1, port=1433) </msg>
+<status status="PASS" starttime="20230406 21:52:16.729" endtime="20230406 21:52:16.748"/>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<var>@{results}</var>
+<arg>SELECT AVG(${column}) from ${TABLE_NAME}</arg>
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<msg timestamp="20230406 21:52:16.749" level="INFO">Executing : Query  |  SELECT AVG(min_salary) from hr.jobs </msg>
+<msg timestamp="20230406 21:52:16.754" level="INFO">@{results} = [ (Decimal('6568.421052'),) ]</msg>
+<status status="PASS" starttime="20230406 21:52:16.748" endtime="20230406 21:52:16.754"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${results}[0][0]</arg>
+<arg>${expected}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230406 21:52:16.754" level="INFO">Argument types are:
+&lt;class 'decimal.Decimal'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230406 21:52:16.754" endtime="20230406 21:52:16.754"/>
+</kw>
+<status status="PASS" starttime="20230406 21:52:16.728" endtime="20230406 21:52:16.754"/>
+</kw>
+<kw name="Check average value in column">
+<arg>max_salary</arg>
+<arg>13210.526315</arg>
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
+connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
+<msg timestamp="20230406 21:52:16.755" level="INFO">Connecting using : pymssql.connect(database=TRN, user=SA, password=4Fh2FwDjQYTLMbPZ, host=127.0.0.1, port=1433) </msg>
+<status status="PASS" starttime="20230406 21:52:16.755" endtime="20230406 21:52:16.773"/>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<var>@{results}</var>
+<arg>SELECT AVG(${column}) from ${TABLE_NAME}</arg>
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<msg timestamp="20230406 21:52:16.773" level="INFO">Executing : Query  |  SELECT AVG(max_salary) from hr.jobs </msg>
+<msg timestamp="20230406 21:52:16.778" level="INFO">@{results} = [ (Decimal('13210.526315'),) ]</msg>
+<status status="PASS" starttime="20230406 21:52:16.773" endtime="20230406 21:52:16.778"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${results}[0][0]</arg>
+<arg>${expected}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230406 21:52:16.779" level="INFO">Argument types are:
+&lt;class 'decimal.Decimal'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230406 21:52:16.778" endtime="20230406 21:52:16.779"/>
+</kw>
+<status status="PASS" starttime="20230406 21:52:16.754" endtime="20230406 21:52:16.779"/>
+</kw>
+<status status="PASS" starttime="20230406 21:52:16.728" endtime="20230406 21:52:16.779"/>
+</test>
+<status status="PASS" starttime="20230406 21:52:16.627" endtime="20230406 21:52:16.779"/>
+</suite>
+<suite id="s1-s3" name="Test Regions" source="/Users/Anna_Sudnitsyna/Documents/3 pandas/4_Test_Automation/homework_robot/tests/test_regions.robot">
+<test id="s1-s3-t1" name="Check minimal value in region_name column" line="9">
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
+connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
+<msg timestamp="20230406 21:52:16.783" level="INFO">Connecting using : pymssql.connect(database=TRN, user=SA, password=4Fh2FwDjQYTLMbPZ, host=127.0.0.1, port=1433) </msg>
+<status status="PASS" starttime="20230406 21:52:16.783" endtime="20230406 21:52:16.798"/>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<var>@{results}</var>
+<arg>SELECT MIN(region_name) from ${TABLE_NAME}</arg>
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<msg timestamp="20230406 21:52:16.799" level="INFO">Executing : Query  |  SELECT MIN(region_name) from hr.regions </msg>
+<msg timestamp="20230406 21:52:16.806" level="INFO">@{results} = [ ('Americas',) ]</msg>
+<status status="PASS" starttime="20230406 21:52:16.799" endtime="20230406 21:52:16.806"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${results}[0][0]</arg>
+<arg>Americas</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230406 21:52:16.806" endtime="20230406 21:52:16.806"/>
+</kw>
+<status status="PASS" starttime="20230406 21:52:16.782" endtime="20230406 21:52:16.807"/>
+</test>
+<test id="s1-s3-t2" name="Check maximum value in region_name column" line="14">
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
+connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
+<msg timestamp="20230406 21:52:16.808" level="INFO">Connecting using : pymssql.connect(database=TRN, user=SA, password=4Fh2FwDjQYTLMbPZ, host=127.0.0.1, port=1433) </msg>
+<status status="PASS" starttime="20230406 21:52:16.807" endtime="20230406 21:52:16.833"/>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<var>@{results}</var>
+<arg>SELECT MAX(region_name) from ${TABLE_NAME}</arg>
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<msg timestamp="20230406 21:52:16.835" level="INFO">Executing : Query  |  SELECT MAX(region_name) from hr.regions </msg>
+<msg timestamp="20230406 21:52:16.842" level="INFO">@{results} = [ ('Middle East and Africa',) ]</msg>
+<status status="PASS" starttime="20230406 21:52:16.834" endtime="20230406 21:52:16.842"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${results}[0][0]</arg>
+<arg>Middle East and Africa</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230406 21:52:16.842" endtime="20230406 21:52:16.843"/>
+</kw>
+<status status="PASS" starttime="20230406 21:52:16.807" endtime="20230406 21:52:16.843"/>
+</test>
+<status status="PASS" starttime="20230406 21:52:16.780" endtime="20230406 21:52:16.843"/>
+</suite>
+<status status="PASS" starttime="20230406 21:52:16.519" endtime="20230406 21:52:16.844"/>
+</suite>
+<statistics>
+<total>
+<stat pass="6" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="6" fail="0" skip="0" id="s1" name="Tests">Tests</stat>
+<stat pass="2" fail="0" skip="0" id="s1-s1" name="Test Departments">Tests.Test Departments</stat>
+<stat pass="2" fail="0" skip="0" id="s1-s2" name="Test Jobs">Tests.Test Jobs</stat>
+<stat pass="2" fail="0" skip="0" id="s1-s3" name="Test Regions">Tests.Test Regions</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
