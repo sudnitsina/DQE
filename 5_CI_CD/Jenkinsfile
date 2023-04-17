@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    environment {
+        PYTHONPATH = '4_Test_Automation/homework_pytest/src'
+    }
+    stages {
+        stage('install requirements') {
+            steps {
+                sh 'pip install -r 4_Test_Automation/homework_pytest/requirements.txt'
+            }
+        }
+        stage('run tests') {
+            steps {
+                sh 'pytest 4_Test_Automation/homework_pytest'
+            }
+        }
+    }
+}
