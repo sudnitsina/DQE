@@ -5,7 +5,7 @@ class TestDepartments:
         """Check count of unique values in location_id column."""
         query = f'SELECT COUNT(DISTINCT(location_id)) from {self.TABLE};'
         result = db.execute_query(query)
-        assert float(result[0]) == 7
+        assert float(result[0]) == 8
 
     def test_most_frequent_location(self, db):
         """Check most frequent value in location_id column."""
