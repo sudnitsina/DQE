@@ -6,13 +6,18 @@ pipeline {
     stages {
         stage('install requirements') {
             steps {
-                sh "git checkout ${params.BRANCH}"
                 sh 'pip install -r 4_Test_Automation/homework_pytest/requirements.txt'
             }
         }
         stage('run tests') {
             steps {
                 sh 'pytest 4_Test_Automation/homework_pytest'
+            }
+        }
+        stage('deploy') {
+            steps {
+                sh 'chmod +x 5_CI_CD/deploy.sh'
+                sh '5_CI_CD/deploy.sh'
             }
         }
     }
