@@ -1,0 +1,11 @@
+version: '3'
+services:
+  jenkins:
+    build: .
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    env_file:
+      - ../4_Test_Automation/homework_pytest/.env
+    volumes:
+      - ./jenkins_data:/var/jenkins_home
