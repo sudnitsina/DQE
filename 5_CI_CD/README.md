@@ -26,6 +26,12 @@ The pipeline test_br is configured to allow running tests on a specific branch o
 For example, a branch was created with a pull request where one test is broken. We run the test_br pipeline specifying this branch and see that the tests have failed. Before merging into the main branch, the tests must be green.
 Git Parameter Plugin was used to add the ability to select a branch from those already existing in the repository.
 
-![img_1.png](img_1.png)
-![img_2.png](img_2.png)
-![img_3.png](img_3.png)
+![img_1.png](images/img_1.png)
+![img_2.png](images/img_2.png)
+![img_3.png](images/img_3.png)
+
+### Deployment pipeline
+The 'deploy' pipeline includes running a script for deployment as the last step. 
+![img_4.png](images/img_4.png)
+If the tests fail, this step will not be executed.
+![img_5.png](images/img_5.png)
